@@ -6,7 +6,7 @@ export default function Navbar() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   return (
-    <nav className="navbar navbar-expand-md navbar-light p-0 bg-primary mb-4">
+    <nav className="navbar navbar-expand-md navbar-light p-0 bg-primary">
       <div className="container-fluid ps-0">
         <Link
           className="navbar-brand bg-white d-flex pe-2 align-items-center"

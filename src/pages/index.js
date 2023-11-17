@@ -1,6 +1,22 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+import dynamic from "next/dynamic";
+import homeImgs from "@/components/home_imgs";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+  ssr: false,
+});
+
+const carouselConfig = {
+  autoplay: true,
+  autoplayTimeout: 2500,
+  dots: false,
+  margin: 0,
+  loop: true,
+  items: 1,
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +43,25 @@ export default function Home() {
 
       <main className={inter.className}>
         <Navbar />
+
+        <div className="container-fluid p-0">
+          <div className="row m-0">
+            <div className="col-12 p-0">
+              <OwlCarousel {...carouselConfig}>
+                {homeImgs.map((img, index) => (
+                  <img
+                    src={img}
+                    alt="image"
+                    width="100%"
+                    height="500px"
+                    style={{ objectFit: "cover" }}
+                    key={index}
+                  /> 
+                ))}
+              </OwlCarousel>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   );
