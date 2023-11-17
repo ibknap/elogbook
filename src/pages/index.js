@@ -56,9 +56,49 @@ export default function Home() {
                     height="500px"
                     style={{ objectFit: "cover" }}
                     key={index}
-                  /> 
+                  />
                 ))}
               </OwlCarousel>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-sm-6">
+              <h5 className="mb-3">ABOUT THE e-LOGBOOK</h5>
+
+              <p>
+                the electronic logbook (e-logbook) is a digital tool used for
+                recording and managing various types of data and information in
+                a structured and organized manner. It provides a more efficient
+                and convenient alternative to traditional paper-based logbooks.
+                the e-logbook is a digital version of a traditional logbook used
+                to record and track various activities, events or data it offers
+                the advantage of convenience, accessibility and efficient data
+                management compared to paper-based logbook
+              </p>
+            </div>
+
+            <div className="col-sm-6">
+              <h5 className="mb-3">ABOUT SIWES IN MAU. YOLA</h5>
+
+              <p>
+                Modibbo Adama University, Yola is one of the participating
+                institutions. All the technological and Science related programs
+                of the university with exception of those in school of
+                management have been approved for SIWES by the National
+                Universities Commission (NUC). An average of 1,100 students of
+                the university has been participating in the scheme every year
+                for the past decade. Modibbo Adama University, Yola believes, in
+                the provision of an avenue for students to acquire practical
+                industrial exposure in their respective disciplines during the
+                years of their studies, this is because; such exposure would
+                prepare students to fit more readily into industrial work
+                environment after graduation. The scheme also offers lecturers
+                the opportunity to evaluate the relevance of training to the
+                needs of industries.
+              </p>
             </div>
           </div>
         </div>
