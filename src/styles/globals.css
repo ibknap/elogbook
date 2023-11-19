@@ -5,3 +5,8 @@
 .bg-primary {
   background-color: rgb(208, 115, 72) !important;
 }
+
+/* toatify */
+.Toastify__progress-bar-theme--dark {
+  background: rgb(208, 115, 72) !important;
+}
