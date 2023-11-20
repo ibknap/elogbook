@@ -250,11 +250,11 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link text-white" href="/signin">
                 Admin
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
