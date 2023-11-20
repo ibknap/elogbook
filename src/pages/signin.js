@@ -36,13 +36,13 @@ export default function Signin() {
                   expires: 14,
                 });
                 toast.dark("Welcome supervisor");
-                router.push("/");
+                router.push("/supervisor/profile");
               } else if (user.isStudent) {
                 Cookies.set("ElogBookSignIn", true, {
                   expires: 14,
                 });
                 toast.dark("Welcome student");
-                router.push("/");
+                router.push("/student/student_bio");
               } else {
                 toast.dark("User has no access", { className: "text-danger" });
                 logOut();
@@ -113,7 +113,7 @@ export default function Signin() {
 
           <form className="col-md-4 text-start mt-5" onSubmit={onSignin}>
             <div className="mb-3">
-              <label className="form-label" htmlFor="emailAddress">
+              <label className="form-label" htmlhtmlFor="emailAddress">
                 Email address
               </label>
               <input
@@ -127,7 +127,7 @@ export default function Signin() {
             </div>
 
             <div className="mb-4">
-              <label className="form-label" htmlFor="password">
+              <label className="form-label" htmlhtmlFor="password">
                 Password
               </label>
               <input

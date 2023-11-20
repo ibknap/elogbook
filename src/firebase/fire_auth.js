@@ -53,10 +53,9 @@ export default function useFireAuth() {
 
   const logOut = async () => {
     await signOut(auth).then(clear);
-    Cookies.remove("MehmetSignedIn");
-    Cookies.remove("MehmetDealerCode");
-    location.reload();
-    toast.success("Kullanıcı oturumu kapattı");
+    Cookies.remove("ElogBookSignIn");
+    location.replace("/");
+    toast.success("Logging out");
   };
 
   useEffect(() => {

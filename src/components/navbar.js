@@ -69,7 +69,7 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav me-auto mb-2 mb-md-0">
               <li className="nav-item">
-                <Link className="nav-link text-white" href="/student_bio">
+                <Link className="nav-link text-white" href="/student/student_bio">
                   Student Bio
                 </Link>
               </li>

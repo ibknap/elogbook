@@ -10,3 +10,18 @@
 .Toastify__progress-bar-theme--dark {
   background: rgb(208, 115, 72) !important;
 }
+
+.profile_img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.spacer {
+  margin-top: 80px;
+}
+
+@media (max-width: 786px) {
+  .spacer {
+    margin-top: 0;
+  }
+}
