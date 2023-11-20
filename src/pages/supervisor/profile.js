@@ -53,7 +53,7 @@ export default function Profile() {
             </div>
 
             <div className="col-12 mt-5 mb-2 text-center text-muted">
-              <small>Copyrights © Habila David for MAUTECH 2023</small>
+              <small>Copyrights © Habila David for MAU 2023</small>
             </div>
           </div>
         </div>
