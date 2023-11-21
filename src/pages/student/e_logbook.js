@@ -6,6 +6,7 @@ import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useAuth } from "@/firebase/fire_auth_context";
 import { db } from "@/firebase/fire_config";
 import { toast } from "react-toastify";
+import { Modal } from "react-bootstrap";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +14,8 @@ export default function ELogbook() {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const { authUser } = useAuth();
+  const [selectedLogbook, setSelectedLogbook] = useState(null);
+  const [showLogbook, setShowLogbook] = useState(false);
   const [startWeek1, setStartWeek1] = useState("");
   const [startWeek2, setStartWeek2] = useState("");
   const [startWeek3, setStartWeek3] = useState("");
@@ -85,6 +88,20 @@ export default function ELogbook() {
   const [desc22, setDesc22] = useState("");
   const [desc23, setDesc23] = useState("");
   const [desc24, setDesc24] = useState("");
+  const [activityMon, setActivityMon] = useState("");
+  const [activityMonImg, setActivityMonImg] = useState(null);
+  const [activityTue, setActivityTue] = useState("");
+  const [activityTueImg, setActivityTueImg] = useState(null);
+  const [activityWed, setActivityWed] = useState("");
+  const [activityWedImg, setActivityWedImg] = useState(null);
+  const [activityThu, setActivityThu] = useState("");
+  const [activityThuImg, setActivityThuImg] = useState(null);
+  const [activityFri, setActivityFri] = useState("");
+  const [activityFriImg, setActivityFriImg] = useState(null);
+  const [activitySat, setActivitySat] = useState("");
+  const [activitySatImg, setActivitySatImg] = useState(null);
+  const [activitySun, setActivitySun] = useState("");
+  const [activitySunImg, setActivitySunImg] = useState(null);
 
   useEffect(() => {
     if (authUser) {
@@ -438,6 +455,504 @@ export default function ELogbook() {
       .finally(() => setIsLoading(false));
   };
 
+  const updateActivities = async (e) => {
+    e.preventDefault();
+
+    const collRef = collection(db, "users");
+    const docRef = doc(collRef, authUser.email);
+    let dataToUpdate = {};
+
+    if (selectedLogbook === 1) {
+      dataToUpdate = {
+        "logBook.activityMon1":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue1":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed1":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu1":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri1":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat1":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun1":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 2) {
+      dataToUpdate = {
+        "logBook.activityMon2":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue2":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed2":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu2":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri2":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat2":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun2":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 3) {
+      dataToUpdate = {
+        "logBook.activityMon3":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue3":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed3":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu3":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri3":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat3":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun3":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 4) {
+      dataToUpdate = {
+        "logBook.activityMon4":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue4":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed4":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu4":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri4":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat4":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun4":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 5) {
+      dataToUpdate = {
+        "logBook.activityMon5":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue5":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed5":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu5":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri5":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat5":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun5":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 6) {
+      dataToUpdate = {
+        "logBook.activityMon6":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue6":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed6":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu6":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri6":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat6":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun6":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 6) {
+      dataToUpdate = {
+        "logBook.activityMon6":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue6":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed6":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu6":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri6":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat6":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun6":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 7) {
+      dataToUpdate = {
+        "logBook.activityMon7":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue7":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed7":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu7":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri7":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat7":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun7":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 8) {
+      dataToUpdate = {
+        "logBook.activityMon8":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue8":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed8":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu8":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri8":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat8":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun8":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 9) {
+      dataToUpdate = {
+        "logBook.activityMon9":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue9":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed9":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu9":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri9":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat9":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun9":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 10) {
+      dataToUpdate = {
+        "logBook.activityMon10":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue10":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed10":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu10":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri10":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat10":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun10":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 11) {
+      dataToUpdate = {
+        "logBook.activityMon11":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue11":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed11":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu11":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri11":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat11":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun11":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 12) {
+      dataToUpdate = {
+        "logBook.activityMon12":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue12":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed12":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu12":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri12":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat12":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun12":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 13) {
+      dataToUpdate = {
+        "logBook.activityMon13":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue13":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed13":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu13":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri13":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat13":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun13":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 14) {
+      dataToUpdate = {
+        "logBook.activityMon14":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue14":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed14":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu14":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri14":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat14":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun14":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 15) {
+      dataToUpdate = {
+        "logBook.activityMon15":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue15":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed15":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu15":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri15":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat15":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun15":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 16) {
+      dataToUpdate = {
+        "logBook.activityMon16":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue16":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed16":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu16":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri16":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat16":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun16":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 17) {
+      dataToUpdate = {
+        "logBook.activityMon17":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue17":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed17":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu17":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri17":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat17":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun17":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 18) {
+      dataToUpdate = {
+        "logBook.activityMon18":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue18":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed18":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu18":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri18":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat18":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun18":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 19) {
+      dataToUpdate = {
+        "logBook.activityMon19":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue19":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed19":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu19":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri19":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat19":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun19":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 20) {
+      dataToUpdate = {
+        "logBook.activityMon20":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue20":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed20":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu20":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri20":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat20":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun20":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 21) {
+      dataToUpdate = {
+        "logBook.activityMon21":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue21":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed21":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu21":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri21":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat21":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun21":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 22) {
+      dataToUpdate = {
+        "logBook.activityMon22":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue22":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed22":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu22":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri22":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat22":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun22":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 23) {
+      dataToUpdate = {
+        "logBook.activityMon23":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue23":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed23":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu23":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri23":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat23":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun23":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    if (selectedLogbook === 24) {
+      dataToUpdate = {
+        "logBook.activityMon24":
+          activityMon ?? user?.logBook?.activityMon ?? activityMon,
+        "logBook.activityTue24":
+          activityTue ?? user?.logBook?.activityTue ?? activityTue,
+        "logBook.activityWed24":
+          activityWed ?? user?.logBook?.activityWed ?? activityWed,
+        "logBook.activityThu24":
+          activityThu ?? user?.logBook?.activityThu ?? activityThu,
+        "logBook.activityFri24":
+          activityFri ?? user?.logBook?.activityFri ?? activityFri,
+        "logBook.activitySat24":
+          activitySat ?? user?.logBook?.activitySat ?? activitySat,
+        "logBook.activitySun24":
+          activitySun ?? user?.logBook?.activitySun ?? activitySun,
+      };
+    }
+
+    updateDoc(docRef, dataToUpdate)
+      .then(() => {
+        e.target.reset();
+        toast.dark("Activities updated");
+      })
+      .catch((error) => {
+        if (error.code == "not-found") {
+          toast.dark("Student not found", { className: "text-danger" });
+        } else {
+          toast.dark(`Error occured: ${error.message}`, {
+            className: "text-danger",
+          });
+        }
+      });
+  };
+
   return (
     <>
       <Head>
@@ -477,8 +992,10 @@ export default function ELogbook() {
                         <th scope="col">Start Week</th>
                         <th scope="col">End Week</th>
                         <th scope="col">Activity Description</th>
+                        <th scope="col">Activities</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
@@ -518,6 +1035,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc1(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(1);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -560,6 +1089,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc2(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(2);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -600,6 +1141,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc3(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(3);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -642,6 +1195,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc4(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(4);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -682,6 +1247,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc5(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(5);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -724,6 +1301,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc6(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(6);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -764,6 +1353,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc7(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(7);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -806,6 +1407,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc8(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(8);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -846,6 +1459,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc9(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(9);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -888,6 +1513,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc10(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(10);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -928,6 +1565,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc11(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(11);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -970,6 +1619,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc12(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(12);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -983,8 +1644,10 @@ export default function ELogbook() {
                         <th scope="col">Start Week</th>
                         <th scope="col">End Week</th>
                         <th scope="col">Activity Description</th>
+                        <th scope="col">Activities</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       <tr>
                         <th scope="row">13</th>
@@ -1024,6 +1687,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc13(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(13);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -1066,6 +1741,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc14(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(14);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -1106,6 +1793,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc15(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(15);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -1148,6 +1847,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc16(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(16);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -1188,6 +1899,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc17(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(17);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -1230,6 +1953,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc18(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(18);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -1270,6 +2005,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc19(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(19);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -1312,6 +2059,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc20(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(20);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -1352,6 +2111,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc21(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(21);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -1394,6 +2165,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc22(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(22);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
 
                       <tr>
@@ -1434,6 +2217,18 @@ export default function ELogbook() {
                             }
                             onChange={(e) => setDesc23(e.target.value)}
                           />
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(23);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
                         </td>
                       </tr>
 
@@ -1476,6 +2271,18 @@ export default function ELogbook() {
                             onChange={(e) => setDesc24(e.target.value)}
                           />
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedLogbook(24);
+                              setShowLogbook(true);
+                            }}
+                            className="btn btn-dark w-100"
+                          >
+                            Add
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -1499,6 +2306,247 @@ export default function ELogbook() {
           </div>
         </div>
       </main>
+
+      <Modal
+        size="lg"
+        scrollable
+        show={showLogbook}
+        onHide={() => {
+          setSelectedLogbook(null);
+          setShowLogbook(false);
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Activities</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+            <div className="col-12">
+              <b>Comment</b>
+              <p>
+                {user &&
+                  user.logBook &&
+                  (selectedLogbook === 1
+                    ? user.logBook.comment1
+                    : selectedLogbook === 2
+                    ? user.logBook.comment2
+                    : selectedLogbook === 3
+                    ? user.logBook.comment3
+                    : selectedLogbook === 4
+                    ? user.logBook.comment4
+                    : selectedLogbook === 5
+                    ? user.logBook.comment5
+                    : selectedLogbook === 6
+                    ? user.logBook.comment6
+                    : selectedLogbook === 7
+                    ? user.logBook.comment7
+                    : selectedLogbook === 8
+                    ? user.logBook.comment8
+                    : selectedLogbook === 9
+                    ? user.logBook.comment9
+                    : selectedLogbook === 10
+                    ? user.logBook.comment10
+                    : selectedLogbook === 11
+                    ? user.logBook.comment11
+                    : selectedLogbook === 12
+                    ? user.logBook.comment12
+                    : selectedLogbook === 13
+                    ? user.logBook.comment13
+                    : selectedLogbook === 14
+                    ? user.logBook.comment14
+                    : selectedLogbook === 15
+                    ? user.logBook.comment15
+                    : selectedLogbook === 16
+                    ? user.logBook.comment16
+                    : selectedLogbook === 17
+                    ? user.logBook.comment17
+                    : selectedLogbook === 18
+                    ? user.logBook.comment18
+                    : selectedLogbook === 19
+                    ? user.logBook.comment19
+                    : selectedLogbook === 20
+                    ? user.logBook.comment20
+                    : selectedLogbook === 21
+                    ? user.logBook.comment21
+                    : selectedLogbook === 22
+                    ? user.logBook.comment22
+                    : selectedLogbook === 23
+                    ? user.logBook.comment23
+                    : selectedLogbook === 24
+                    ? user.logBook.comment24
+                    : "")}
+              </p>
+            </div>
+
+            <form
+              onSubmit={updateActivities}
+              className="col-12 table-responsive"
+            >
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Activities</th>
+                    <th scope="col">Upload</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Monday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activityMon"
+                        placeholder="Activity"
+                        onChange={(e) => setActivityMon(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivityMonImg(e)}
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Tuesday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activityTue"
+                        placeholder="Activity"
+                        onChange={(e) => setActivityTue(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivityTueImg(e)}
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Wednesday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activityWed"
+                        placeholder="Activity"
+                        onChange={(e) => setActivityWed(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivityWedImg(e)}
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Thursday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activityThu"
+                        placeholder="Activity"
+                        onChange={(e) => setActivityThu(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivityThuImg(e)}
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Friday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activityFri"
+                        placeholder="Activity"
+                        onChange={(e) => setActivityFri(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivityFriImg(e)}
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Saturday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activitySat"
+                        placeholder="Activity"
+                        onChange={(e) => setActivitySat(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivitySatImg(e)}
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Sunday</th>
+                    <td>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="activitySun"
+                        placeholder="Activity"
+                        onChange={(e) => setActivitySun(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={(e) => setActivitySunImg(e)}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div className="col-12 mt-3">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn btn-dark w-100"
+                >
+                  {isLoading ? "Updating Activities..." : "Update Activities"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
