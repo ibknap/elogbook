@@ -80,7 +80,7 @@ export default function ManageStudents() {
                   </thead>
                   <tbody>
                     {students.map((student, index) => (
-                      <tr>
+                      <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>{student?.bio?.name}</td>
                         <td>{student?.bio?.matricNo}</td>
