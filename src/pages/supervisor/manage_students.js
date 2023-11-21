@@ -21,6 +21,30 @@ export default function ManageStudents() {
   const [students, setStudents] = useState([]);
   const [selectedLogbook, setSelectedLogbook] = useState(null);
   const [showLogbook, setShowLogbook] = useState(false);
+  const [comment1, setComment1] = useState("");
+  const [comment2, setComment2] = useState("");
+  const [comment3, setComment3] = useState("");
+  const [comment4, setComment4] = useState("");
+  const [comment5, setComment5] = useState("");
+  const [comment6, setComment6] = useState("");
+  const [comment7, setComment7] = useState("");
+  const [comment8, setComment8] = useState("");
+  const [comment9, setComment9] = useState("");
+  const [comment10, setComment10] = useState("");
+  const [comment11, setComment11] = useState("");
+  const [comment12, setComment12] = useState("");
+  const [comment13, setComment13] = useState("");
+  const [comment14, setComment14] = useState("");
+  const [comment15, setComment15] = useState("");
+  const [comment16, setComment16] = useState("");
+  const [comment17, setComment17] = useState("");
+  const [comment18, setComment18] = useState("");
+  const [comment19, setComment19] = useState("");
+  const [comment20, setComment20] = useState("");
+  const [comment21, setComment21] = useState("");
+  const [comment22, setComment22] = useState("");
+  const [comment23, setComment23] = useState("");
+  const [comment24, setComment24] = useState("");
 
   useEffect(() => {
     const q = query(collection(db, "users"), where("isStudent", "==", true));
@@ -160,6 +184,9 @@ export default function ManageStudents() {
                     <th scope="col">End Week</th>
                     <th scope="col">Activity</th>
                     <th scope="col">Industry-Base Supervisor Comment</th>
+                    <th scope="col" className="text-center">
+                      Save Comments
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -173,8 +200,18 @@ export default function ManageStudents() {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Comment"
+                          placeholder={
+                            selectedLogbook?.logBook?.comment1
+                              ? selectedLogbook?.logBook?.comment1
+                              : "Comment"
+                          }
+                          onChange={(e) => setComment1(e.target.value)}
                         />
+                      </td>
+                      <td>
+                        <button className="btn btn-dark w-100">
+                          Save Comment
+                        </button>
                       </td>
                     </tr>
                   )}
