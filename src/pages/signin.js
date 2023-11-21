@@ -36,7 +36,7 @@ export default function Signin() {
                   expires: 14,
                 });
                 toast.dark("Welcome supervisor");
-                router.push("/supervisor/profile");
+                router.push("/supervisor/manage_students");
               } else if (user.isStudent) {
                 Cookies.set("ElogBookSignIn", true, {
                   expires: 14,
