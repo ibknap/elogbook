@@ -6,6 +6,9 @@ import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useAuth } from "@/firebase/fire_auth_context";
 import { db } from "@/firebase/fire_config";
 import { toast } from "react-toastify";
+import { Image } from "iconsax-react";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+const storage = getStorage();
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +16,7 @@ const date = `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getF
 
 export default function StudentBio() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [user, setUser] = useState(null);
   const [name, setName] = useState("");
   const [matricNo, setMatricNo] = useState("");
@@ -84,6 +88,42 @@ export default function StudentBio() {
       .finally(() => setIsLoading(false));
   };
 
+  const updateImage = async (e) => {
+    setIsLoadingImage(true);
+    toast.dark("Updating student image");
+
+    const selectedImage = e.target.files[0];
+    const imageRef = ref(storage, `images/${selectedImage.name}`);
+    await uploadBytes(imageRef, selectedImage);
+
+    getDownloadURL(imageRef)
+      .then(async (image) => {
+        const collRef = collection(db, "users");
+        const docRef = doc(collRef, authUser.email);
+        const dataToUpdate = {
+          image: image,
+        };
+
+        updateDoc(docRef, dataToUpdate)
+          .then(() => toast.dark("Student image updated"))
+          .catch((error) => {
+            if (error.code == "not-found") {
+              toast.dark("Student not found", { className: "text-danger" });
+            } else {
+              toast.dark(`Error occured: ${error.message}`, {
+                className: "text-danger",
+              });
+            }
+          })
+          .finally(() => setIsLoadingImage(false));
+      })
+      .catch((error) => {
+        toast.dark(`Error occured uploading image: ${error.message}`, {
+          className: "text-danger",
+        });
+      });
+  };
+
   return (
     <>
       <Head>
@@ -116,13 +156,30 @@ export default function StudentBio() {
                 user && user.bio ? "text-start" : "text-center mt-5"
               }`}
             >
-              <img
-                src="/me.png"
-                alt="profile image"
-                className={`shadow ${
-                  user && user.bio ? "w-50 rounded-circle" : "profile_img"
-                }`}
-              />
+              {user?.image ? (
+                <img
+                  src={user.image}
+                  alt="profile image"
+                  style={{ width: 200, height: 200, objectFit: "cover" }}
+                  className="shadow rounded-circle"
+                />
+              ) : (
+                <Image size={150} variant="Bold" className="text-primary" />
+              )}
+
+              <div className="my-3">
+                <label className="form-label" htmlFor="studentImg">
+                  Student Picture (optional)
+                </label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="studentImg"
+                  disabled={isLoadingImage}
+                  placeholder="Supervisor Picture (optional)"
+                  onChange={(e) => updateImage(e)}
+                />
+              </div>
 
               {user && user.bio && (
                 <ul className="list-unstyled text-muted mt-3 text-start">

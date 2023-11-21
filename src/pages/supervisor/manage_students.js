@@ -152,7 +152,6 @@ export default function ManageStudents() {
                 <table className="table table-bordered">
                   <thead>
                     <tr>
-                      <th scope="col">S/N</th>
                       <th scope="col">Name</th>
                       <th scope="col">Matric No</th>
                       <th scope="col">Department</th>
@@ -160,25 +159,27 @@ export default function ManageStudents() {
                     </tr>
                   </thead>
                   <tbody>
-                    {students.map((student, index) => (
-                      <tr key={index}>
-                        <th scope="row">{index + 1}</th>
-                        <td>{student?.bio?.name}</td>
-                        <td>{student?.bio?.matricNo}</td>
-                        <td>{student?.bio?.department}</td>
-                        <td>
-                          <button
-                            onClick={() => {
-                              setSelectedLogbook(student);
-                              setShowLogbook(true);
-                            }}
-                            className="btn btn-sm btn-dark rounded-1 w-100"
-                          >
-                            View
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                    {students.map(
+                      (student, index) =>
+                        student.bio && (
+                          <tr key={index}>
+                            <td scope="row">{student?.bio?.name}</td>
+                            <td>{student?.bio?.matricNo}</td>
+                            <td>{student?.bio?.department}</td>
+                            <td>
+                              <button
+                                onClick={() => {
+                                  setSelectedLogbook(student);
+                                  setShowLogbook(true);
+                                }}
+                                className="btn btn-sm btn-dark rounded-1 w-100"
+                              >
+                                View
+                              </button>
+                            </td>
+                          </tr>
+                        )
+                    )}
                   </tbody>
                 </table>
               </div>

@@ -140,7 +140,7 @@ export default function OrgDetails() {
           .then(() => toast.dark("Supervisor image updated"))
           .catch((error) => {
             if (error.code == "not-found") {
-              toast.dark("Supervisor not found", { className: "text-danger" });
+              toast.dark("Student not found", { className: "text-danger" });
             } else {
               toast.dark(`Error occured: ${error.message}`, {
                 className: "text-danger",
